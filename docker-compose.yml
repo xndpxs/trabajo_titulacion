@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    working_dir: /var/www/html/gymes.com
+    volumes:
+      - ./html/gymes.com:/var/www/html/gymes.com
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      - APP_ENV=testing
+
+  db:
+    image: mariadb
+    command: --event-scheduler=ON  # Asegurarse de que el Event Scheduler esté habilitado
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=****
+      - MYSQL_DATABASE=gymes
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=**** # Reemplazar por password de db
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+  selenium:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"
+    depends_on:
+      - web
+
+volumes:
+  db_data:
