@@ -13,5 +13,6 @@ Este proyecto fue realizado como parte del trabajo de titulación.
 - Para las pruebas y otros problemas, seguir el README.md indicado dentro de `html/gymes.com`
 
 ## Uso
-- Docker compose up en la raíz del proyecto.
+- Instalar Docker.
+- `docker compose up` en la raíz del proyecto.
 - Agregar la base de datos `gymesv11.sql` que se encuentra en `html/gymes.com` a PHPMyAdmin. A la página web se puede ingresar mediante `http://localhost:8080/gymes.com` y a PHPMyAdmin mediante `http://localhost:8081/` como fue definido en el `docker-compose.yml`.
